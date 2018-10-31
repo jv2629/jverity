@@ -1,15 +1,9 @@
 ---
 title: "Jaclyn F. Verity"
 ---
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 <img src = "images/profpic.jpg" style = "width:45%; border:10px solid; margin-right: 20px" align="left">
-=======
-<img src = "images/profpic.jpg" style = "width:65%; border:10px solid; margin-right: 20px" align="left">
->>>>>>> bb412622e0e5fa17b44d54d3a95f39596c7422dd
-=======
-<img src = "images/profpic.jpg" style = "width:65%; border:10px solid; margin-right: 20px" align="left">
->>>>>>> bb412622e0e5fa17b44d54d3a95f39596c7422dd
+
 
 I am a map nerd. In my spare time I digitize remote villages and refugee camps around the world as a member of the Humanitarian OpenStreetMap Team. I do this because I want to live a value-based-life rooted in courage, curiosity, and compassion. Volunteering my time and skills in geographic information systems (GIS) allows me to practice my values while following my passion on a small scale. But I desire to do more. 
 
