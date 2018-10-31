@@ -1,0 +1,6 @@
+---
+output: html_document
+---
+
+<img src = "documents/jfv_resume.pdf" border:10px solid; margin-right: 20px" align="center">
+<img src = "documents/jfv_resume2.pdf" border:10px solid; margin-right: 20px" align="center">

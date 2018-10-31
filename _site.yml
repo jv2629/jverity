@@ -1,0 +1,19 @@
+name: "jfv web yml"
+output_dir: "."
+navbar:
+  title: "Home"
+  right:
+    - text: "About"
+      href: about.html
+    - text: "Resume"
+      href: resume.html
+    - text: "Projects"
+      href: projects.html
+    - icon: fa-envelope fa-lg
+      href: mailto:<jv2629@cumc.columbia.edu>
+    - icon: fab fa-linkedin
+      href: http://linkedin.com/in/jfverity
+    - icon: fa-github fa-lg
+      href: http://github.com/<jv2629>/
+output:
+  html_document

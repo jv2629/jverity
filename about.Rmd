@@ -1,0 +1,12 @@
+---
+title: "About"
+---
+
+This site was created as a project for my Data Science course at Columbia Mailman School of Public Health. 
+
+It represents my first trials in creating a website. 
+
+The content is hosted on github.
+
+Enjoy!
+
