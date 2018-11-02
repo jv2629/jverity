@@ -40,6 +40,14 @@ inner_join(NYC_sample, common_zipz,
   mutate(zipcode = as.factor(zipcode)) %>% 
   plot_ly(y = ~score, color = ~zipcode, type = "box", colors = "Set1")
 ```
+```{r}
+NYC_sample %>% 
+  count(violation_code) %>% 
+  mutate(violation_code = as.factor(violation_code),
+    violation_code = fct_reorder(violation_code, -n)) %>% 
+  top_n(20) %>% 
+  plot_ly(x = ~violation_code, y = ~n, color = ~violation_code, type = "bar")
+```
 
 ### Enabling the Geographic Analysis of HIV Programmatic Data
 #### Next Generation Internship with ICAP in Tanzania
