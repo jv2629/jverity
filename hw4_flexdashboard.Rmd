@@ -1,0 +1,66 @@
+---
+title: "NYC Restaurant Inspection Data"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+
+set.seed(305)
+NYC_sample = rest_inspec %>% 
+  sample_n(100000)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Most Common Cuisines in NYC Restaurant Inspections
+```{r echo = FALSE}
+
+cuisine_plot = NYC_sample %>% 
+  select(cuisine_description, score)  %>% 
+  group_by(cuisine_description) %>% 
+  summarise(mean_score = mean(score, na.rm = TRUE)) %>% 
+  arrange(desc(mean_score)) %>% 
+  slice(1:10) %>%
+  plot_ly(x = ~cuisine_description, y = ~mean_score, type = "scatter", mode = "markers",
+          alpha = 0.5) 
+
+cuisine_plot
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Most Common Zipcodes for NYC Restaurant Inspections
+```{r}
+common_zipz =
+  NYC_sample %>% 
+  count(zipcode, sort = TRUE) %>% 
+  top_n(8) %>% 
+  select(zipcode)
+
+inner_join(NYC_sample, common_zipz,
+             by = "zipcode") %>% 
+  mutate(zipcode = as.factor(zipcode)) %>% 
+  plot_ly(y = ~score, color = ~zipcode, type = "box", colors = "Set1")
+```
+
+
+### Most Common Violations in NYC Restaurant Inspections
+```{r}
+NYC_sample %>% 
+  count(violation_code) %>% 
+  mutate(violation_code = as.factor(violation_code),
+    violation_code = fct_reorder(violation_code, -n)) %>% 
+  top_n(20) %>% 
+  plot_ly(x = ~violation_code, y = ~n, color = ~violation_code, type = "bar")
+```
+
+

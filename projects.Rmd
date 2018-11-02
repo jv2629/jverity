@@ -2,55 +2,6 @@
 title: "Projects"
 output: html_document
 ---
-### Flexboard of NYC Restaurant Inspections
-```{r include = FALSE}
-library(tidyverse)
-library(plotly)
-library(p8105.datasets)
-
-rmarkdown::render("dashboard_template.Rmd", output_format = "flex_dashboard")
-
-set.seed(305)
-NYC_sample = rest_inspec %>% 
-  sample_n(100000)
-```
-
-```{r echo = FALSE}
-
-cuisine_plot = NYC_sample %>% 
-  select(cuisine_description, score)  %>% 
-  group_by(cuisine_description) %>% 
-  summarise(mean_score = mean(score, na.rm = TRUE)) %>% 
-  arrange(desc(mean_score)) %>% 
-  slice(1:10) %>%
-  plot_ly(x = ~cuisine_description, y = ~mean_score, type = "scatter", mode = "markers",
-          alpha = 0.5) 
-
-cuisine_plot
-```
-
-```{r}
-common_zipz =
-  NYC_sample %>% 
-  count(zipcode, sort = TRUE) %>% 
-  top_n(8) %>% 
-  select(zipcode)
-
-inner_join(NYC_sample, common_zipz,
-             by = "zipcode") %>% 
-  mutate(zipcode = as.factor(zipcode)) %>% 
-  plot_ly(y = ~score, color = ~zipcode, type = "box", colors = "Set1")
-```
-
-```{r}
-NYC_sample %>% 
-  count(violation_code) %>% 
-  mutate(violation_code = as.factor(violation_code),
-    violation_code = fct_reorder(violation_code, -n)) %>% 
-  top_n(20) %>% 
-  plot_ly(x = ~violation_code, y = ~n, color = ~violation_code, type = "bar")
-```
-
 ### Enabling the Geographic Analysis of HIV Programmatic Data
 #### Next Generation Internship with ICAP in Tanzania
 ##### Summer 2018
