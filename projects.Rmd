@@ -5,6 +5,7 @@ output: html_document
 ### Flexboard of NYC Restaurant Inspections
 ```{r include = FALSE}
 library(tidyverse)
+library(plotly)
 
 library(p8105.datasets)
 
@@ -21,11 +22,23 @@ cuisine_plot = NYC_sample %>%
   summarise(mean_score = mean(score, na.rm = TRUE)) %>% 
   arrange(desc(mean_score)) %>% 
   slice(1:10) %>%
-  ggplot(aes(x = cuisine_description, y = mean_score)) +
-    geom_point() + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(x = "Type of Cuisine", y = "Mean Inspection Score", title = "Cuisines With Worst Scores", caption = "Each violation adds points to the evaluation. Higher scores mean more violations.") 
+  plot_ly(x = ~cuisine_description, y = ~mean_score, type = "scatter", mode = "markers",
+          alpha = 0.5) 
 
 cuisine_plot
+```
 
+```{r}
+common_zipz =
+  NYC_sample %>% 
+  count(zipcode, sort = TRUE) %>% 
+  top_n(8) %>% 
+  select(zipcode)
+
+inner_join(NYC_sample, common_zipz,
+             by = "zipcode") %>% 
+  mutate(zipcode = as.factor(zipcode)) %>% 
+  plot_ly(y = ~score, color = ~zipcode, type = "box", colors = "Set1")
 ```
 
 ### Enabling the Geographic Analysis of HIV Programmatic Data
