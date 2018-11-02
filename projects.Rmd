@@ -6,8 +6,9 @@ output: html_document
 ```{r include = FALSE}
 library(tidyverse)
 library(plotly)
-
 library(p8105.datasets)
+
+rmarkdown::render("dashboard_template.Rmd", output_format = "flex_dashboard")
 
 set.seed(305)
 NYC_sample = rest_inspec %>% 
@@ -40,6 +41,7 @@ inner_join(NYC_sample, common_zipz,
   mutate(zipcode = as.factor(zipcode)) %>% 
   plot_ly(y = ~score, color = ~zipcode, type = "box", colors = "Set1")
 ```
+
 ```{r}
 NYC_sample %>% 
   count(violation_code) %>% 
