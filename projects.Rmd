@@ -8,9 +8,9 @@ library(tidyverse)
 
 library(p8105.datasets)
 
-
+set.seed(305)
 NYC_sample = rest_inspec %>% 
-  sample_n(2000)
+  sample_n(100000)
 ```
 
 ```{r echo = FALSE}
@@ -21,7 +21,6 @@ cuisine_plot = NYC_sample %>%
   summarise(mean_score = mean(score, na.rm = TRUE)) %>% 
   arrange(desc(mean_score)) %>% 
   slice(1:10) %>%
-  mutate(cuisine_description = str_replace(cuisine_description, "Bottled beverages, including water, sodas, juices, etc.", "Bottled Beverages")) %>% 
   ggplot(aes(x = cuisine_description, y = mean_score)) +
     geom_point() + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + labs(x = "Type of Cuisine", y = "Mean Inspection Score", title = "Cuisines With Worst Scores", caption = "Each violation adds points to the evaluation. Higher scores mean more violations.") 
 
